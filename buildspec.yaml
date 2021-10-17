@@ -7,9 +7,9 @@ phases:
     commands:
     - echo Logging in to Amazon ECR...
     - echo $AWS_DEFAULT_REGION
-    - echo $CONTAINER_NAME
+    - pip install --upgrade awscli==1.18.1
     - aws --version
-    - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION )
+    - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
     - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
     - IMAGE_URI=${REPOSITORY_URI}:${TAG}
   build:
